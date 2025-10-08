@@ -1,0 +1,170 @@
+/* --- Reset & Pengaturan Dasar --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* GANTI INI DENGAN BACKGROUND 3D */
+    background-color: #003d51; /* Warna dasar yang sangat gelap */
+    
+    /* Ganti URL di bawah dengan gambar 3D abstrak favorit Anda (misalnya mesh, low poly, atau abstract dark geometry) */
+    background-image: url('https://i.imgur.com/uR1uQo2.jpg'); /* URL Contoh Gambar Abstrak 3D Gelap */
+    background-size: cover; /* Pastikan gambar menutupi seluruh layar */
+    background-attachment: fixed; /* Agar background tetap saat di-scroll */
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* Akhir GANTI BACKGROUND */
+    
+    color: #e2e8f0; 
+    overflow-x: hidden;
+}
+
+header {
+    background-color: rgba(15, 23, 42, 0.7) !important; /* Sesuaikan dengan warna dasar baru (0.9 agar sedikit transparan) */
+    backdrop-filter: blur(8px); /* Blur yang sedikit lebih kuat */
+}
+
+/* Bagian Hero dan Proyek perlu diatur agar tetap kontras dengan background baru */
+#beranda, #tentang, #kontak {
+    /* Menghapus background yang solid di setiap section agar background 3D terlihat */
+    background: none !important; 
+}
+
+/* Section Proyek perlu background samar agar kartu proyek terlihat */
+#proyek {
+    background-color: rgba(15, 23, 42, 0.7) !important; /* Tambahkan lapisan gelap transparan hanya di bagian Proyek */
+}
+
+.container {
+    /* Mengikuti setting container di Tailwind */
+    width: 100%;
+    max-width: 1280px;
+    padding-left: 1.5rem; /* px-6 */
+    padding-right: 1.5rem; /* px-6 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- Animasi Utama: Fade In Section --- */
+/* Kelas ini dipanggil oleh JavaScript di index.html */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Hero Section Text Animation (Opsional, tergantung Anda ingin menggunakannya) --- */
+/* Coba tambahkan kelas 'animated-text' pada h1 dan p di Hero Section */
+.animated-text {
+    overflow: hidden; /* Penting untuk efek typing atau slide-in */
+}
+
+/* Contoh Animasi Slide-Up untuk Judul Hero */
+.hero #beranda h1 {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.3s forwards;
+}
+
+.hero #beranda p.text-teal-400 {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.5s forwards;
+}
+
+.hero #beranda a.bg-teal-500 {
+    opacity: 0;
+    animation: slideUp 0.8s ease-out 0.7s forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Efek Border Hologram pada Foto Profil --- */
+.lg\:w-1\/3 img {
+    border: 3px solid transparent;
+    border-radius: 50%;
+    /* Gunakan filter untuk memberikan sedikit glow */
+    filter: drop-shadow(0 0 15px rgba(52, 211, 163, 0.3)); /* Teal shadow */
+    transition: all 0.5s ease;
+}
+
+.lg\:w-1\/3 img:hover {
+    filter: drop-shadow(0 0 25px rgba(52, 211, 163, 0.6));
+    transform: scale(1.03);
+}
+
+/* --- Efek Hover Interaktif pada Kartu Proyek --- */
+.bg-slate-800.rounded-lg.overflow-hidden {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(52, 211, 163, 0.1); /* Border tipis untuk define */
+}
+
+/* Efek cahaya/overlay yang muncul saat hover */
+.bg-slate-800.rounded-lg.overflow-hidden::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(52, 211, 163, 0.1), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.bg-slate-800.rounded-lg.overflow-hidden:hover::before {
+    opacity: 1;
+}
+
+/* Pastikan konten tetap di atas overlay */
+.bg-slate-800.rounded-lg.overflow-hidden > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Animasi untuk ikon sosial di Kontak */
+.flex.justify-center.space-x-6 a {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.flex.justify-center.space-x-6 a:hover {
+    color: #34d399; /* Warna teal terang */
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* --- Media Queries (Responsif) --- */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.1rem;
+    }
+}
